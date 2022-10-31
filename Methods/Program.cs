@@ -63,26 +63,33 @@ namespace Methods
             {
                 string actionChosen = Console.ReadLine();
                 
-                if (!Int32.TryParse(actionChosen, out operatorNum))
+                try 
                 {
-                    Console.WriteLine("Please enter a numerical value between 1 and 4:");
-                    continue;
-                }
+                    operatorNum = Int32.Parse(actionChosen);
 
-                if (operatorNum < 1 || operatorNum > 4)
-                {
-                    Console.WriteLine("Please enter a numerical value between 1 and 4:");
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
+                    if (!Int32.TryParse(actionChosen, out operatorNum))
+                    {
+                        Console.WriteLine("Please enter a numerical value between 1 and 4:");
+                        continue;
+                    }
 
+                    if (operatorNum < 1 || operatorNum > 4)
+                    {
+                        Console.WriteLine("Please enter a numerical value between 1 and 4:");
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                } catch (FormatException) 
+                {
+                    throw new FormatException();
+                }
             }
                 return operatorNum;
 
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
         }
 
 
@@ -120,8 +127,12 @@ namespace Methods
             {
                 return x / y;
             }
+            else
+            {
+                throw new FormatException();
+            }
 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
